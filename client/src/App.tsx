@@ -9,7 +9,7 @@ function App() {
   for (let i = 0; i < cars.length; i++) {
     text += cars[i] + "<br>";
   }`;
-  const submitAnswer = () => {};
+  const codeChange = () => {};
   return (
     <div className="App">
       <h1>For Loop</h1>
@@ -19,13 +19,11 @@ function App() {
         multiline
         label="code"
         defaultValue={codeBlock}
+        onChange={codeChange}
         InputLabelProps={{
           shrink: true,
         }}
       />
-      <Button variant="contained" onClick={submitAnswer}>
-        submit
-      </Button>
     </div>
   );
 }
