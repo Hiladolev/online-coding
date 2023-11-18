@@ -18,7 +18,26 @@ function CodeBlockPage(): JSX.Element {
           `http://localhost:8080/api/v1/codeBlocks/codeBlockById/${codeBlockId}`
         )
         .then((response) => {
-          setCodeBlockObj(response.data[0]);
+          const result = response.data[0];
+          if (!result.entrances) {
+            axios
+              .put(
+                `http://localhost:8080/api/v1/codeBlocks/setMentorEntrance/${codeBlockId}`
+              )
+              .then((response) => {
+                result.entrances = 1;
+                console.log(codeBlockObj);
+              });
+          } else {
+            axios
+              .put(
+                `http://localhost:8080/api/v1/codeBlocks/addStudentEntrance/${codeBlockId}`
+              )
+              .then((response) => {
+                result.entrances += 1;
+              });
+          }
+          setCodeBlockObj(result);
         })
         .catch((error) => {
           console.error("Error fetching data: ", error);
