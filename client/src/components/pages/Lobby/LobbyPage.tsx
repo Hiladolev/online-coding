@@ -4,7 +4,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import CodeBlock from "../../models/CodeBlock";
 
-function Lobby(): JSX.Element {
+function LobbyPage(): JSX.Element {
   const [codeBlocks, setCodeBlocks] = useState<CodeBlock[] | []>([]);
   const fetchCodeBlocks = () => {
     console.log("getting code blocks from backend....");
@@ -33,4 +33,4 @@ function Lobby(): JSX.Element {
     </div>
   );
 }
-export default Lobby;
+export default LobbyPage;
