@@ -3,6 +3,7 @@ import CodeBlockList from "./CodeBlockList/CodeBlockList";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import CodeBlock from "../../models/CodeBlock";
+import { socket } from "../../layout/Main";
 
 function LobbyPage(): JSX.Element {
   const [codeBlocks, setCodeBlocks] = useState<CodeBlock[] | []>([]);
@@ -19,6 +20,11 @@ function LobbyPage(): JSX.Element {
   };
   useEffect(() => {
     fetchCodeBlocks();
+    if (socket.connected) {
+      socket.disconnect();
+    } else {
+      console.log("Socket is not connected");
+    }
   }, []);
   return (
     <div>
