@@ -23,3 +23,9 @@ const getEntrancesById = async (id: number) => {
     `SELECT entrances FROM online_coding.code_blocks where id=${id}`
   );
 };
+
+export default {
+  createCodeBlocksTable,
+  getAllCodeBlocks,
+  getEntrancesById,
+};
