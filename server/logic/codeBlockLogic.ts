@@ -1,5 +1,15 @@
 import dal_mysql from "../utils/dal_mysql";
-import { OkPacket } from "mysql";
+
+const createCodeBlocksTable = () => {
+  const SQLcommand = `
+    CREATE TABLE IF NOT EXISTS code_blocks (
+      id INT NOT NULL AUTO_INCREMENT,
+      title VARCHAR(45) NOT NULL,
+      code VARCHAR(256) NOT NULL,
+      entrances INT NULL,
+      PRIMARY KEY (id));`;
+  const response = dal_mysql.execute(SQLcommand);
+};
 
 const getAllCodeBlocks = async () => {
   const SQLcommand = `
