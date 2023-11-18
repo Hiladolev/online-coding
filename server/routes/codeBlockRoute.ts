@@ -16,5 +16,13 @@ router.get(
     response.status(200).json(await logic.getEntrancesById(+request.params.id));
   }
 );
+router.put(
+  "/addStudentEntrance/:id",
+  async (request: Request, response: Response, next: NextFunction) => {
+    response
+      .status(200)
+      .json(await logic.addStudentEntranceByCodeBlockId(+request.params.id));
+  }
+);
 
 export default router;
