@@ -1,5 +1,5 @@
 import Typography from "@mui/material/Typography";
-import CodeBlockList from "./CodeBlockList";
+import CodeBlockList from "./CodeBlockList/CodeBlockList";
 function Lobby(): JSX.Element {
   return (
     <div>
