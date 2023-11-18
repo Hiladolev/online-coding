@@ -2,6 +2,7 @@ import express from "express";
 import * as http from "http";
 import { Server } from "socket.io";
 import cors from "cors";
+import config from "./utils/Config";
 
 const app = express();
 
@@ -22,6 +23,6 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(3001, () => {
-  console.log("server is running");
+server.listen(config.WebPort, () => {
+  console.log(`listening on http://${config.mySQLhost}:${config.WebPort}`);
 });
