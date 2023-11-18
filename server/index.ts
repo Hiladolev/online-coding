@@ -5,6 +5,7 @@ import cors from "cors";
 import config from "./utils/Config";
 import bodyParser from "body-parser";
 import router from "./routes/codeBlockRoute";
+import logic from "./logic/codeBlockLogic";
 
 const app = express();
 
@@ -30,6 +31,9 @@ app.use(express.json());
 app.use(bodyParser.json());
 
 app.use("/api/v1/codeBlocks", router);
+
+console.log("creating table if it doesn't exist");
+logic.createCodeBlocksTable();
 
 server.listen(config.WebPort, () => {
   console.log(`listening on http://${config.mySQLhost}:${config.WebPort}`);
