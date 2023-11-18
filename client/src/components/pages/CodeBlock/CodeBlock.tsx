@@ -1,3 +1,6 @@
+interface CodeBlockIdProps {
+  id: number;
+}
 function CodeBlock(): JSX.Element {
   return (
     <div>
