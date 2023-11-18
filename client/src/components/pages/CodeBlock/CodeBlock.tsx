@@ -2,6 +2,7 @@ import { useParams } from "react-router";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import CodeBlockModel from "../../models/CodeBlock";
+import { TextField } from "@mui/material";
 
 function CodeBlockPage(): JSX.Element {
   const params = useParams();
@@ -28,16 +29,25 @@ function CodeBlockPage(): JSX.Element {
   }, [codeBlockId]);
 
   return (
-    <div>
+    <>
       {codeBlockObj ? (
         <div>
           <h1>{codeBlockObj.title}</h1>
-          <p>{codeBlockObj.code}</p>
+          <TextField
+            fullWidth
+            id="outlined-multiline-static"
+            multiline
+            value={codeBlockObj.code}
+            // onChange={codeChange}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
         </div>
       ) : (
         <p>Loading...</p>
       )}
-    </div>
+    </>
   );
 }
 
