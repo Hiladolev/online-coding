@@ -1,6 +1,6 @@
-import { useParams } from "react-router";
+import { useLocation, useParams } from "react-router";
 import axios from "axios";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import CodeBlockModel from "../../models/CodeBlock";
 import { TextField } from "@mui/material";
 
@@ -10,6 +10,7 @@ function CodeBlockPage(): JSX.Element {
   const [codeBlockObj, setCodeBlockObj] = useState<
     CodeBlockModel | undefined
   >();
+  let location = useLocation();
 
   const getCodeBlock = () => {
     axios
@@ -35,7 +36,7 @@ function CodeBlockPage(): JSX.Element {
   };
   useEffect(() => {
     if (!codeBlockObj) getCodeBlock();
-  }, []);
+  }, [location, codeBlockId]);
 
   return (
     <>
