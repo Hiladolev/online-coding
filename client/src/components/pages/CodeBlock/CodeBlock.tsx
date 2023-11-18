@@ -31,7 +31,7 @@ function CodeBlockPage(): JSX.Element {
     <div>
       {codeBlockObj ? (
         <div>
-          <h2>{codeBlockObj.title}</h2>
+          <h1>{codeBlockObj.title}</h1>
           <p>{codeBlockObj.code}</p>
         </div>
       ) : (
