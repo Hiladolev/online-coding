@@ -10,4 +10,11 @@ router.get(
   }
 );
 
+router.get(
+  "/entrancesById/:id",
+  async (request: Request, response: Response, next: NextFunction) => {
+    response.status(200).json(await logic.getEntrancesById(+request.params.id));
+  }
+);
+
 export default router;
