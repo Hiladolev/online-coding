@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import Lobby from "../pages/Lobby/Lobby";
-import CodeBlock from "../pages/CodeBlock/CodeBlock";
+import CodeBlock from "../pages/CodeBlock/CodeBlockPage";
 
 function MainRoute(): JSX.Element {
   return (
