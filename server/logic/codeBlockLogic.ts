@@ -24,8 +24,19 @@ const getEntrancesById = async (id: number) => {
   );
 };
 
+const addEntranceForStudentByCodeBlockId = async (id: number) => {
+  return await dal_mysql.execute(
+    `UPDATE
+    online_coding.code_blocks 
+   SET
+    entrances = entrances + 1 
+   WHERE
+    id=${id}`
+  );
+};
 export default {
   createCodeBlocksTable,
   getAllCodeBlocks,
   getEntrancesById,
+  addEntranceForStudentByCodeBlockId,
 };
