@@ -1,6 +1,6 @@
 import { useParams } from "react-router";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import CodeBlockModel from "../../models/CodeBlock";
 import { TextField } from "@mui/material";
 
@@ -11,41 +11,31 @@ function CodeBlockPage(): JSX.Element {
     CodeBlockModel | undefined
   >();
 
+  const getCodeBlock = () => {
+    axios
+      .get(
+        `http://localhost:8080/api/v1/codeBlocks/codeBlockById/${codeBlockId}`
+      )
+      .then((response) => {
+        const result = response.data[0];
+        setCodeBlockObj(result);
+        if (!result.entrances) {
+          axios.put(
+            `http://localhost:8080/api/v1/codeBlocks/setMentorEntrance/${codeBlockId}`
+          );
+        } else {
+          axios.put(
+            `http://localhost:8080/api/v1/codeBlocks/addStudentEntrance/${codeBlockId}`
+          );
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching data: ", error);
+      });
+  };
   useEffect(() => {
-    const getCodeBlock = () => {
-      axios
-        .get(
-          `http://localhost:8080/api/v1/codeBlocks/codeBlockById/${codeBlockId}`
-        )
-        .then((response) => {
-          const result = response.data[0];
-          if (!result.entrances) {
-            axios
-              .put(
-                `http://localhost:8080/api/v1/codeBlocks/setMentorEntrance/${codeBlockId}`
-              )
-              .then((response) => {
-                result.entrances = 1;
-                console.log(codeBlockObj);
-              });
-          } else {
-            axios
-              .put(
-                `http://localhost:8080/api/v1/codeBlocks/addStudentEntrance/${codeBlockId}`
-              )
-              .then((response) => {
-                result.entrances += 1;
-              });
-          }
-          setCodeBlockObj(result);
-        })
-        .catch((error) => {
-          console.error("Error fetching data: ", error);
-        });
-    };
-
-    getCodeBlock();
-  }, [codeBlockId]);
+    if (!codeBlockObj) getCodeBlock();
+  }, []);
 
   return (
     <>
