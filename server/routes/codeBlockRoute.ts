@@ -32,5 +32,11 @@ router.put(
       .json(await logic.setMentorEntranceByCodeBlockId(+request.params.id));
   }
 );
+router.get(
+  "/codeBlockById/:id",
+  async (request: Request, response: Response, next: NextFunction) => {
+    response.status(200).json(await logic.getCodeBlockById(+request.params.id));
+  }
+);
 
 export default router;
