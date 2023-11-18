@@ -2,15 +2,15 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 
-interface CodeBlockNameProps {
-  codeBlockName: string;
+interface CodeBlockProps {
+  title: string;
 }
-function SingleCodeBlock({ codeBlockName }: CodeBlockNameProps): JSX.Element {
+function SingleCodeBlock({ title }: CodeBlockProps): JSX.Element {
   return (
     <>
       <ListItem disablePadding>
         <ListItemButton>
-          <ListItemText inset primary={codeBlockName} />
+          <ListItemText inset primary={title} />
         </ListItemButton>
       </ListItem>
     </>

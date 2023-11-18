@@ -1,9 +1,13 @@
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import SingleCodeBlock from "./SingleCodeBlock";
+import CodeBlock from "../../../models/CodeBlock";
 
-const codeListNames: string[] = ["For", "While", "For In", "For Of"];
-function CodeBlockList(): JSX.Element {
+interface CodeBlockListProps {
+  codeBlocksList: CodeBlock[] | [];
+}
+
+function CodeBlockList({ codeBlocksList }: CodeBlockListProps): JSX.Element {
   return (
     <Box
       sx={{
@@ -15,11 +19,8 @@ function CodeBlockList(): JSX.Element {
     >
       <nav aria-label="main mailbox folders">
         <List>
-          {codeListNames.map((codeBlockName) => (
-            <SingleCodeBlock
-              codeBlockName={codeBlockName}
-              key={codeBlockName}
-            />
+          {codeBlocksList.map((codeBlock: CodeBlock) => (
+            <SingleCodeBlock title={codeBlock.title} key={codeBlock.id} />
           ))}
         </List>
       </nav>
