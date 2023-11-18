@@ -44,10 +44,17 @@ const setMentorEntranceByCodeBlockId = async (id: number) => {
     id=${id}`
   );
 };
+const getCodeBlockById = async (id: number) => {
+  return await dal_mysql.execute(
+    `SELECT * FROM online_coding.code_blocks where id=${id}`
+  );
+};
+
 export default {
   createCodeBlocksTable,
   getAllCodeBlocks,
   getEntrancesById,
   addStudentEntranceByCodeBlockId,
   setMentorEntranceByCodeBlockId,
+  getCodeBlockById,
 };
