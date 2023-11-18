@@ -3,6 +3,7 @@ import * as http from "http";
 import { Server } from "socket.io";
 import cors from "cors";
 import config from "./utils/Config";
+import bodyParser from "body-parser";
 
 const app = express();
 
@@ -24,6 +25,8 @@ io.on("connection", (socket) => {
 });
 
 app.use(express.json());
+
+app.use(bodyParser.json());
 
 server.listen(config.WebPort, () => {
   console.log(`listening on http://${config.mySQLhost}:${config.WebPort}`);
