@@ -1,7 +1,7 @@
-interface CodeBlockIdProps {
-  id: number;
-}
+import { useParams } from "react-router";
+
 function CodeBlock(): JSX.Element {
+  const codeBlockId = useParams();
   return (
     <div>
       <h1>hi</h1>
