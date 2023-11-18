@@ -4,6 +4,7 @@ import { Server } from "socket.io";
 import cors from "cors";
 import config from "./utils/Config";
 import bodyParser from "body-parser";
+import router from "./routes/codeBlockRoute";
 
 const app = express();
 
@@ -27,6 +28,8 @@ io.on("connection", (socket) => {
 app.use(express.json());
 
 app.use(bodyParser.json());
+
+app.use("/api/v1/codeBlocks", router);
 
 server.listen(config.WebPort, () => {
   console.log(`listening on http://${config.mySQLhost}:${config.WebPort}`);
