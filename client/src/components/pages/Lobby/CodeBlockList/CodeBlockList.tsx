@@ -20,7 +20,11 @@ function CodeBlockList({ codeBlocksList }: CodeBlockListProps): JSX.Element {
       <nav aria-label="main mailbox folders">
         <List>
           {codeBlocksList.map((codeBlock: CodeBlock) => (
-            <SingleCodeBlock title={codeBlock.title} key={codeBlock.id} />
+            <SingleCodeBlock
+              title={codeBlock.title}
+              id={codeBlock.id}
+              key={codeBlock.id}
+            />
           ))}
         </List>
       </nav>
