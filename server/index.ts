@@ -23,6 +23,8 @@ io.on("connection", (socket) => {
   });
 });
 
+app.use(express.json());
+
 server.listen(config.WebPort, () => {
   console.log(`listening on http://${config.mySQLhost}:${config.WebPort}`);
 });
