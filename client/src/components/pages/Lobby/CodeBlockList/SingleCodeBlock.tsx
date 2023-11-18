@@ -5,12 +5,13 @@ import { useNavigate } from "react-router";
 
 interface CodeBlockProps {
   title: string;
+  id: number;
 }
-function SingleCodeBlock({ title }: CodeBlockProps): JSX.Element {
+function SingleCodeBlock({ title, id }: CodeBlockProps): JSX.Element {
   const navigate = useNavigate();
   return (
     <>
-      <ListItem disablePadding onClick={() => navigate("/codeBlock/1")}>
+      <ListItem disablePadding onClick={() => navigate(`/codeBlock/${id}`)}>
         <ListItemButton>
           <ListItemText inset primary={title} />
         </ListItemButton>
