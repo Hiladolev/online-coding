@@ -20,11 +20,11 @@ function LobbyPage(): JSX.Element {
   };
   useEffect(() => {
     fetchCodeBlocks();
-    if (socket.connected) {
-      socket.disconnect();
-    } else {
-      console.log("Socket is not connected");
-    }
+    // if (socket.connected) {
+    //   socket.disconnect();
+    // } else {
+    //   console.log("Socket is not connected");
+    // }
   }, []);
 
   return (
