@@ -62,7 +62,7 @@ function CodeBlockPage(): JSX.Element {
   return (
     <>
       {codeBlockObj ? (
-        <div>
+        <>
           <Typography
             variant="h2"
             component="h2"
@@ -85,7 +85,7 @@ function CodeBlockPage(): JSX.Element {
               shrink: true,
             }}
           />
-        </div>
+        </>
       ) : (
         <p>Loading...</p>
       )}
