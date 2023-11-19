@@ -42,17 +42,17 @@ function CodeBlockPage(): JSX.Element {
   }, [location, codeBlockId]);
 
   const codeChange = (e: ChangeEvent<HTMLInputElement>) => {
-    socket.emit("code change", e.target.value);
+    socket.emit("code change", e.target.value, codeBlockId);
   };
   useEffect(() => {
     socket.emit("user_has_entered", codeBlockId);
   }, []);
 
   useEffect(() => {
-    socket.on("received code change", (data: string) => {
+    socket.on("received code change", (data: string, id) => {
+      if (codeBlockId !== id) return;
       setCodeBlockObj((prevCodeBlockObj) => {
-        if (!prevCodeBlockObj) return prevCodeBlockObj; // return unchanged state if it's undefined
-        return { ...prevCodeBlockObj, code: data };
+        return { ...(prevCodeBlockObj as any), code: data };
       });
     });
 
