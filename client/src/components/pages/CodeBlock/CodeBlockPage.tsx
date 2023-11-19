@@ -22,6 +22,7 @@ function CodeBlockPage(): JSX.Element {
       .then((response) => {
         const result = response.data[0];
         setCodeBlockObj(result);
+        console.log(result);
         if (!result.entrances) {
           axios.put(
             `http://localhost:8080/api/v1/codeBlocks/setMentorEntrance/${codeBlockId}`
@@ -43,16 +44,25 @@ function CodeBlockPage(): JSX.Element {
   const codeChange = (e: ChangeEvent<HTMLInputElement>) => {
     socket.emit("code change", e.target.value);
   };
+  useEffect(() => {
+    socket.emit("user_has_entered", codeBlockId);
+  }, []);
 
   useEffect(() => {
     socket.on("received code change", (data: string) => {
-      console.log(data);
       setCodeBlockObj((prevCodeBlockObj) => {
         if (!prevCodeBlockObj) return prevCodeBlockObj; // return unchanged state if it's undefined
         return { ...prevCodeBlockObj, code: data };
       });
     });
 
+    return () => {
+      socket.off();
+    };
+  }, []);
+
+  useEffect(() => {
+    socket.on("add_entrance", (data: number) => {});
     return () => {
       socket.off();
     };
@@ -81,6 +91,9 @@ function CodeBlockPage(): JSX.Element {
             onChange={codeChange}
             InputLabelProps={{
               shrink: true,
+            }}
+            InputProps={{
+              readOnly: codeBlockObj.entrances === null,
             }}
             sx={{ pt: 1, width: "100vh" }}
           />
