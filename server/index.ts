@@ -21,9 +21,12 @@ const io = new Server(server, {
 
 io.on("connection", (socket) => {
   console.log(`User Connected: ${socket.id}`);
-  socket.on("code change", (data) => {
-    socket.broadcast.emit("received code change", data);
-    socket.emit("received code change", data);
+  socket.on("user_has_entered", (data) => {
+    socket.emit("add_entrance", data);
+  });
+  socket.on("code change", (data, id) => {
+    socket.broadcast.emit("received code change", data, id);
+    socket.emit("received code change", data, id);
   });
 });
 
