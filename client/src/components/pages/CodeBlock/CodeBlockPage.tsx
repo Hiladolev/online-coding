@@ -4,6 +4,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 import CodeBlockModel from "../../models/CodeBlock";
 import { TextField } from "@mui/material";
 import { io } from "socket.io-client";
+import Typography from "@mui/material/Typography";
 
 const socket = io("http://localhost:8080");
 
@@ -62,7 +63,18 @@ function CodeBlockPage(): JSX.Element {
     <>
       {codeBlockObj ? (
         <div>
-          <h1>{codeBlockObj.title}</h1>
+          <Typography
+            variant="h2"
+            component="h2"
+            sx={{
+              textAlign: "center",
+              pt: 3,
+              fontFamily: "'Roboto Slab', serif", // Specify the font
+              color: "primary.main",
+            }}
+          >
+            {codeBlockObj.title}
+          </Typography>
           <TextField
             fullWidth
             id="outlined-multiline-static"
