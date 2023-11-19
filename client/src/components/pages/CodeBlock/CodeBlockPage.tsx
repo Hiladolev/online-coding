@@ -5,10 +5,8 @@ import CodeBlockModel from "../../models/CodeBlock";
 import { TextField } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { socket } from "../../layout/Main";
-import hljs from "highlight.js";
 import "highlight.js/styles/github.css";
-import javascript from "highlight.js/lib/languages/javascript";
-hljs.registerLanguage("javascript", javascript);
+import Highlight from "react-highlight.js";
 
 function CodeBlockPage(): JSX.Element {
   const params = useParams();
@@ -80,24 +78,21 @@ function CodeBlockPage(): JSX.Element {
           >
             {codeBlockObj.title}
           </Typography>
-          <pre>
-            <code>
-              <TextField
-                fullWidth
-                id="outlined-multiline-static"
-                multiline
-                value={codeBlockObj.code}
-                onChange={codeChange}
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                InputProps={{
-                  readOnly: codeBlockObj.entrances === null,
-                }}
-                sx={{ pt: 1, width: "100vh" }}
-              />
-            </code>
-          </pre>
+          <Highlight language="javascript">{codeBlockObj.code}</Highlight>
+          <TextField
+            fullWidth
+            id="outlined-multiline-static"
+            multiline
+            value={codeBlockObj.code}
+            onChange={codeChange}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            InputProps={{
+              readOnly: codeBlockObj.entrances === null,
+            }}
+            sx={{ pt: 1, width: "100vh" }}
+          />
         </div>
       ) : (
         <p>Loading...</p>
