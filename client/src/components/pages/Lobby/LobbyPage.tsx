@@ -4,7 +4,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import CodeBlock from "../../models/CodeBlock";
 import { socket } from "../../layout/Main";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 function LobbyPage(): JSX.Element {
   const [codeBlocks, setCodeBlocks] = useState<CodeBlock[] | []>([]);
@@ -28,10 +27,8 @@ function LobbyPage(): JSX.Element {
     }
   }, []);
 
-  const defaultTheme = createTheme();
-
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <>
       <Typography
         variant="h1"
         component="h2"
@@ -51,7 +48,7 @@ function LobbyPage(): JSX.Element {
       ) : (
         <p>Loading...</p>
       )}
-    </ThemeProvider>
+    </>
   );
 }
 export default LobbyPage;
