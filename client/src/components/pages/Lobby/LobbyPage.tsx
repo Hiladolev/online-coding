@@ -4,6 +4,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import CodeBlock from "../../models/CodeBlock";
 import { socket } from "../../layout/Main";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 function LobbyPage(): JSX.Element {
   const [codeBlocks, setCodeBlocks] = useState<CodeBlock[] | []>([]);
@@ -26,17 +27,31 @@ function LobbyPage(): JSX.Element {
       console.log("Socket is not connected");
     }
   }, []);
+
+  const defaultTheme = createTheme();
+
   return (
-    <div>
-      <Typography variant="h1" component="h2" sx={{ textAlign: "center" }}>
+    <ThemeProvider theme={defaultTheme}>
+      <Typography
+        variant="h1"
+        component="h2"
+        sx={{
+          textAlign: "center",
+          pt: 3,
+          fontFamily: "'Roboto Slab', serif", // Specify the font
+          fontWeight: 700, // Specify the font weight
+          color: "primary.main",
+        }}
+      >
         Choose Block Code
       </Typography>
+
       {codeBlocks.length > 0 ? (
         <CodeBlockList codeBlocksList={codeBlocks} />
       ) : (
         <p>Loading...</p>
       )}
-    </div>
+    </ThemeProvider>
   );
 }
 export default LobbyPage;
