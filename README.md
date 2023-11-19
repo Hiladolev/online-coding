@@ -22,7 +22,7 @@ The app is a real-time coding platform connecting mentors (like Tom) and learner
 git clone https://github.com/Hiladolev/onlineCoding.git
 
 
-# run dump on your mysql client
+# Run dump on your mysql client
 
 init.sql
 
@@ -31,7 +31,7 @@ init.sql
 cd server
 npm i
 
-# install NPM packages - Client side
+# Install NPM packages - Client side
 
 cd client
 npm i
