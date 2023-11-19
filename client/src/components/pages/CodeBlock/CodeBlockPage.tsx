@@ -14,7 +14,6 @@ function CodeBlockPage(): JSX.Element {
     CodeBlockModel | undefined
   >();
   let location = useLocation();
-  // const [code, setCode] = useState(codeBlock);
 
   const getCodeBlock = () => {
     axios
