@@ -3,10 +3,8 @@ import axios from "axios";
 import { ChangeEvent, useEffect, useState } from "react";
 import CodeBlockModel from "../../models/CodeBlock";
 import { TextField } from "@mui/material";
-import { io } from "socket.io-client";
 import Typography from "@mui/material/Typography";
-
-const socket = io("http://localhost:8080");
+import { socket } from "../../layout/Main";
 
 function CodeBlockPage(): JSX.Element {
   const params = useParams();
