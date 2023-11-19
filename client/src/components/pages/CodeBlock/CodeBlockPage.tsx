@@ -51,7 +51,7 @@ function CodeBlockPage(): JSX.Element {
     socket.emit("code change", e.target.value, codeBlockId);
   };
 
-  //Receiving codeChanges back from the server : data + id
+  //Receiving code changes back from the server : data + id (eventName, listener)
   useEffect(() => {
     socket.on("received code change", (data: string, id) => {
       if (codeBlockId !== id) return;
