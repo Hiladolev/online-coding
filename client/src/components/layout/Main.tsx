@@ -1,4 +1,4 @@
-import { url } from "inspector";
+import { useEffect } from "react";
 import MainRoute from "../routes/MainRoute";
 import Footer from "./Footer";
 import Header from "./Header";
@@ -7,7 +7,14 @@ import io from "socket.io-client";
 export const socket = io("http://localhost:8080", {
   autoConnect: false,
 });
+
 export default function Main() {
+  useEffect(() => {
+    socket.connect();
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
   return (
     <div
       style={{
