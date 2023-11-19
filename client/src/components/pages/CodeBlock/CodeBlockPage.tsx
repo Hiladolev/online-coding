@@ -62,13 +62,13 @@ function CodeBlockPage(): JSX.Element {
   return (
     <>
       {codeBlockObj ? (
-        <>
+        <div>
           <Typography
             variant="h2"
             component="h2"
             sx={{
               textAlign: "center",
-              pt: 3,
+              pt: 2,
               fontFamily: "'Roboto Slab', serif", // Specify the font
               color: "primary.main",
             }}
@@ -84,8 +84,9 @@ function CodeBlockPage(): JSX.Element {
             InputLabelProps={{
               shrink: true,
             }}
+            sx={{ pt: 1, width: "100vh" }}
           />
-        </>
+        </div>
       ) : (
         <p>Loading...</p>
       )}
