@@ -2,7 +2,6 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { useNavigate } from "react-router";
-import { socket } from "../../../layout/Main";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
@@ -17,7 +16,6 @@ function SingleCodeBlock({ title, id }: CodeBlockProps): JSX.Element {
       <ListItem
         disablePadding
         onClick={() => {
-          socket.connect();
           navigate(`/codeBlock/${id}`);
         }}
       >
