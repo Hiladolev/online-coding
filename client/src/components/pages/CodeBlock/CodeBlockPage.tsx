@@ -1,10 +1,14 @@
-import { useLocation, useParams } from "react-router";
+import { useParams } from "react-router";
 import axios from "axios";
 import { ChangeEvent, useEffect, useState } from "react";
 import CodeBlockModel from "../../models/CodeBlock";
 import { TextField } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { socket } from "../../layout/Main";
+import hljs from "highlight.js";
+import "highlight.js/styles/github.css";
+import javascript from "highlight.js/lib/languages/javascript";
+hljs.registerLanguage("javascript", javascript);
 
 function CodeBlockPage(): JSX.Element {
   const params = useParams();
@@ -12,9 +16,9 @@ function CodeBlockPage(): JSX.Element {
   const [codeBlockObj, setCodeBlockObj] = useState<
     CodeBlockModel | undefined
   >();
-  let location = useLocation();
 
   const getCodeBlock = () => {
+    //Requesting from the server the codeBlock object
     axios
       .get(
         `http://localhost:8080/api/v1/codeBlocks/codeBlockById/${codeBlockId}`
@@ -22,7 +26,7 @@ function CodeBlockPage(): JSX.Element {
       .then((response) => {
         const result = response.data[0];
         setCodeBlockObj(result);
-        console.log(result);
+        //Updating entrances by codeBlockId
         if (!result.entrances) {
           axios.put(
             `http://localhost:8080/api/v1/codeBlocks/setMentorEntrance/${codeBlockId}`
@@ -37,17 +41,17 @@ function CodeBlockPage(): JSX.Element {
         console.error("Error fetching data: ", error);
       });
   };
+
   useEffect(() => {
     if (!codeBlockObj) getCodeBlock();
-  }, [location, codeBlockId]);
+  }, [codeBlockId]);
 
+  //Sending codeChange event to the server
   const codeChange = (e: ChangeEvent<HTMLInputElement>) => {
     socket.emit("code change", e.target.value, codeBlockId);
   };
-  useEffect(() => {
-    socket.emit("user_has_entered", codeBlockId);
-  }, []);
 
+  //Receiving codeChanges back from the server : data + id
   useEffect(() => {
     socket.on("received code change", (data: string, id) => {
       if (codeBlockId !== id) return;
@@ -55,18 +59,11 @@ function CodeBlockPage(): JSX.Element {
         return { ...(prevCodeBlockObj as any), code: data };
       });
     });
-
     return () => {
       socket.off();
     };
   }, []);
 
-  useEffect(() => {
-    socket.on("add_entrance", (data: number) => {});
-    return () => {
-      socket.off();
-    };
-  }, []);
   return (
     <>
       {codeBlockObj ? (
@@ -83,20 +80,24 @@ function CodeBlockPage(): JSX.Element {
           >
             {codeBlockObj.title}
           </Typography>
-          <TextField
-            fullWidth
-            id="outlined-multiline-static"
-            multiline
-            value={codeBlockObj.code}
-            onChange={codeChange}
-            InputLabelProps={{
-              shrink: true,
-            }}
-            InputProps={{
-              readOnly: codeBlockObj.entrances === null,
-            }}
-            sx={{ pt: 1, width: "100vh" }}
-          />
+          <pre>
+            <code>
+              <TextField
+                fullWidth
+                id="outlined-multiline-static"
+                multiline
+                value={codeBlockObj.code}
+                onChange={codeChange}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                InputProps={{
+                  readOnly: codeBlockObj.entrances === null,
+                }}
+                sx={{ pt: 1, width: "100vh" }}
+              />
+            </code>
+          </pre>
         </div>
       ) : (
         <p>Loading...</p>
