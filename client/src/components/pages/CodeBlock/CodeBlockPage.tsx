@@ -3,9 +3,8 @@ import axios from "axios";
 import { ChangeEvent, useEffect, useState } from "react";
 import CodeBlockModel from "../../models/CodeBlock";
 import { TextField } from "@mui/material";
-import { io } from "socket.io-client";
-
-const socket = io("http://localhost:8080");
+import Typography from "@mui/material/Typography";
+import { socket } from "../../layout/Main";
 
 function CodeBlockPage(): JSX.Element {
   const params = useParams();
@@ -62,7 +61,18 @@ function CodeBlockPage(): JSX.Element {
     <>
       {codeBlockObj ? (
         <div>
-          <h1>{codeBlockObj.title}</h1>
+          <Typography
+            variant="h2"
+            component="h2"
+            sx={{
+              textAlign: "center",
+              pt: 2,
+              fontFamily: "'Roboto Slab', serif", // Specify the font
+              color: "primary.main",
+            }}
+          >
+            {codeBlockObj.title}
+          </Typography>
           <TextField
             fullWidth
             id="outlined-multiline-static"
@@ -72,6 +82,7 @@ function CodeBlockPage(): JSX.Element {
             InputLabelProps={{
               shrink: true,
             }}
+            sx={{ pt: 1, width: "100vh" }}
           />
         </div>
       ) : (
