@@ -1,3 +1,4 @@
+import { url } from "inspector";
 import MainRoute from "../routes/MainRoute";
 import Footer from "./Footer";
 import Header from "./Header";
@@ -14,6 +15,14 @@ export default function Main() {
         height: "100vh",
         overflow: "hidden",
         flexDirection: "column",
+        backgroundImage:
+          "url('https://images.pexels.com/photos/8534389/pexels-photo-8534389.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        minHeight: "100vh",
+        justifyContent: "center",
+        alignItems: "center",
+        textAlign: "center",
       }}
     >
       <header>
