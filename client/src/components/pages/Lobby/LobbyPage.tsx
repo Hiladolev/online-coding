@@ -28,7 +28,7 @@ function LobbyPage(): JSX.Element {
   }, []);
   return (
     <div>
-      <Typography variant="h1" component="h2">
+      <Typography variant="h1" component="h2" sx={{ textAlign: "center" }}>
         Choose Block Code
       </Typography>
       {codeBlocks.length > 0 ? (
