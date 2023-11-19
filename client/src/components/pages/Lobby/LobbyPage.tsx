@@ -3,7 +3,6 @@ import CodeBlockList from "./CodeBlockList/CodeBlockList";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import CodeBlock from "../../models/CodeBlock";
-import { socket } from "../../layout/Main";
 
 function LobbyPage(): JSX.Element {
   const [codeBlocks, setCodeBlocks] = useState<CodeBlock[] | []>([]);
@@ -20,11 +19,6 @@ function LobbyPage(): JSX.Element {
   };
   useEffect(() => {
     fetchCodeBlocks();
-    // if (socket.connected) {
-    //   socket.disconnect();
-    // } else {
-    //   console.log("Socket is not connected");
-    // }
   }, []);
 
   return (
@@ -35,8 +29,8 @@ function LobbyPage(): JSX.Element {
         sx={{
           textAlign: "center",
           pt: 3,
-          fontFamily: "'Roboto Slab', serif", // Specify the font
-          fontWeight: 700, // Specify the font weight
+          fontFamily: "'Roboto Slab', serif",
+          fontWeight: 700,
           color: "primary.main",
         }}
       >
