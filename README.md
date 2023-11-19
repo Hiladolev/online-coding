@@ -21,6 +21,11 @@ The app is a real-time coding platform connecting mentors (like Tom) and learner
 
 git clone https://github.com/Hiladolev/onlineCoding.git
 
+
+# run dump on your mysql client
+
+init.sql
+
 # Install NPM packages - Server side
 
 cd server
@@ -40,6 +45,8 @@ npm start
 
 cd client
 npm start
+
+
 ```
 
 Copyright © 2023 by <a href="https://github.com/Hiladolev" target="_blank">Hila Dolev</a>
