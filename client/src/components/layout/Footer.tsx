@@ -7,7 +7,7 @@ import { pink } from "@mui/material/colors";
 
 export default function Footer() {
   return (
-    <Box component="footer">
+    <Box component="footer" sx={{ marginBlockEnd: "1rem" }}>
       <Container maxWidth="sm">
         <Typography
           variant="body2"

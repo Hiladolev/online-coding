@@ -11,6 +11,7 @@ const app = express();
 
 app.use(cors());
 
+//Server instance
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
@@ -18,12 +19,8 @@ const io = new Server(server, {
     methods: ["GET", "POST"],
   },
 });
-
+//New connection - receiving event from the client-side
 io.on("connection", (socket) => {
-  console.log(`User Connected: ${socket.id}`);
-  socket.on("user_has_entered", (data) => {
-    socket.emit("add_entrance", data);
-  });
   socket.on("code change", (data, id) => {
     socket.broadcast.emit("received code change", data, id);
     socket.emit("received code change", data, id);

@@ -4,10 +4,11 @@ import Footer from "./Footer";
 import Header from "./Header";
 import io from "socket.io-client";
 
+//Preventing auto connection
 export const socket = io("http://localhost:8080", {
   autoConnect: false,
 });
-
+//Manually connects the socket
 export default function Main() {
   useEffect(() => {
     socket.connect();
@@ -15,6 +16,7 @@ export default function Main() {
       socket.disconnect();
     };
   }, []);
+
   return (
     <div
       style={{
@@ -41,7 +43,6 @@ export default function Main() {
       >
         <MainRoute />
       </main>
-
       <Footer />
     </div>
   );
