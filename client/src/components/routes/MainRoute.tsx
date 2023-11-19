@@ -4,7 +4,7 @@ import CodeBlock from "../pages/CodeBlock/CodeBlockPage";
 
 function MainRoute(): JSX.Element {
   return (
-    <div>
+    <div style={{ marginBlock: "3%" }}>
       <Routes>
         <Route path="/" element={<Lobby />} />
         <Route path="/codeBlock/:id" element={<CodeBlock />} />
