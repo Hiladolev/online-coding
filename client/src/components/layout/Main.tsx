@@ -8,16 +8,30 @@ export const socket = io("http://localhost:8080", {
 });
 export default function Main() {
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        height: "100vh",
+        overflow: "hidden",
+        flexDirection: "column",
+      }}
+    >
       <header>
         <Header />
       </header>
-      <main>
+      <main
+        style={{
+          flexGrow: 1,
+          overflow: "auto",
+          display: "flex",
+          flexDirection: "column",
+          paddingBottom: "14px",
+        }}
+      >
         <MainRoute />
       </main>
-      <footer>
-        <Footer />
-      </footer>
+
+      <Footer />
     </div>
   );
 }
