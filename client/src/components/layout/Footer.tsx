@@ -7,14 +7,14 @@ import { pink } from "@mui/material/colors";
 
 export default function Footer() {
   return (
-    <Box
-      component="footer"
-      sx={{
-        py: 2,
-      }}
-    >
+    <Box component="footer">
       <Container maxWidth="sm">
-        <Typography variant="body2" color="text.secondary" align="center">
+        <Typography
+          variant="body2"
+          color="primary.main"
+          align="center"
+          sx={{ fontFamily: "'Roboto Slab', serif" }}
+        >
           Made with <FavoriteIcon sx={{ color: pink[500] }} /> By &nbsp;
           <Link color="inherit" href="https://github.com/Hiladolev">
             Hila Dolev
