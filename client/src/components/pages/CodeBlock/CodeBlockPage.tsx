@@ -1,8 +1,11 @@
 import { useLocation, useParams } from "react-router";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import CodeBlockModel from "../../models/CodeBlock";
 import { TextField } from "@mui/material";
+import { io } from "socket.io-client";
+
+const socket = io("http://localhost:8080");
 
 function CodeBlockPage(): JSX.Element {
   const params = useParams();
@@ -11,6 +14,7 @@ function CodeBlockPage(): JSX.Element {
     CodeBlockModel | undefined
   >();
   let location = useLocation();
+  // const [code, setCode] = useState(codeBlock);
 
   const getCodeBlock = () => {
     axios
@@ -38,6 +42,23 @@ function CodeBlockPage(): JSX.Element {
     if (!codeBlockObj) getCodeBlock();
   }, [location, codeBlockId]);
 
+  const codeChange = (e: ChangeEvent<HTMLInputElement>) => {
+    socket.emit("code change", e.target.value);
+  };
+
+  useEffect(() => {
+    socket.on("received code change", (data: string) => {
+      console.log(data);
+      setCodeBlockObj((prevCodeBlockObj) => {
+        if (!prevCodeBlockObj) return prevCodeBlockObj; // return unchanged state if it's undefined
+        return { ...prevCodeBlockObj, code: data };
+      });
+    });
+
+    return () => {
+      socket.off();
+    };
+  }, []);
   return (
     <>
       {codeBlockObj ? (
@@ -48,7 +69,7 @@ function CodeBlockPage(): JSX.Element {
             id="outlined-multiline-static"
             multiline
             value={codeBlockObj.code}
-            // onChange={codeChange}
+            onChange={codeChange}
             InputLabelProps={{
               shrink: true,
             }}
