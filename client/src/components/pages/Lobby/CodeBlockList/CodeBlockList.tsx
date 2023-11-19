@@ -15,6 +15,7 @@ function CodeBlockList({ codeBlocksList }: CodeBlockListProps): JSX.Element {
         maxWidth: 360,
         bgcolor: "background.paper",
         margin: "auto",
+        pt: 4,
       }}
     >
       <nav aria-label="main mailbox folders">
