@@ -1,6 +1,6 @@
 # :computer: Online-Coding website
 
-online coding web application that facilitates real-time collaboration between mentors and learners.
+Online coding web application that facilitates real-time collaboration between mentors and learners.
 
 ## Description
 
@@ -11,7 +11,7 @@ The app is a real-time coding platform connecting mentors (like Tom) and learner
 ### Prerequisites
 
 <p>
-    <img src="https://skillicons.dev/icons?i=react,js,nodejs,mysql,express,ts" />
+    <img src="https://skillicons.dev/icons?i=react,nodejs,mysql,express,ts" />
 </p>
 
 ## Installation
