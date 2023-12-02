@@ -15,23 +15,21 @@ function CodeBlockPage(): JSX.Element {
     CodeBlockModel | undefined
   >();
 
-  const getCodeBlock = () => {
+  const getCodeBlock = (id: string | undefined) => {
     //Requesting from the server the codeBlock object
     axios
-      .get(
-        `http://localhost:8080/api/v1/codeBlocks/codeBlockById/${codeBlockId}`
-      )
+      .get(`http://localhost:8080/api/v1/codeBlocks/codeBlockById/${id}`)
       .then((response) => {
         const result = response.data[0];
         setCodeBlockObj(result);
         //Updating entrances by codeBlockId
         if (!result.entrances) {
           axios.put(
-            `http://localhost:8080/api/v1/codeBlocks/setMentorEntrance/${codeBlockId}`
+            `http://localhost:8080/api/v1/codeBlocks/setMentorEntrance/${id}`
           );
         } else {
           axios.put(
-            `http://localhost:8080/api/v1/codeBlocks/addStudentEntrance/${codeBlockId}`
+            `http://localhost:8080/api/v1/codeBlocks/addStudentEntrance/${id}`
           );
         }
       })
@@ -41,8 +39,8 @@ function CodeBlockPage(): JSX.Element {
   };
 
   useEffect(() => {
-    if (!codeBlockObj) getCodeBlock();
-  }, [codeBlockId]);
+    if (!codeBlockObj) getCodeBlock(codeBlockId);
+  }, [codeBlockId, codeBlockObj]);
 
   //Sending codeChange event to the server
   const codeChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -60,7 +58,7 @@ function CodeBlockPage(): JSX.Element {
     return () => {
       socket.off();
     };
-  }, []);
+  }, [codeBlockId]);
 
   return (
     <>
@@ -83,15 +81,16 @@ function CodeBlockPage(): JSX.Element {
             fullWidth
             id="outlined-multiline-static"
             multiline
+            label={"code"}
             value={codeBlockObj.code}
             onChange={codeChange}
-            InputLabelProps={{
-              shrink: true,
-            }}
+            // InputLabelProps={{
+            //   shrink: true,
+            // }}
             InputProps={{
               readOnly: codeBlockObj.entrances === null,
             }}
-            sx={{ pt: 1, width: "100vh" }}
+            // sx={{ pt: 1, width: "100vh" }}
           />
         </div>
       ) : (
