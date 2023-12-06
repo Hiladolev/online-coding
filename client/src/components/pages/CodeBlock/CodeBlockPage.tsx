@@ -78,13 +78,9 @@ function CodeBlockPage(): JSX.Element {
             label={"code"}
             value={codeBlockObj.code}
             onChange={codeChange}
-            // InputLabelProps={{
-            //   shrink: true,
-            // }}
             InputProps={{
               readOnly: codeBlockObj.entrances === null,
             }}
-            // sx={{ pt: 1, width: "100vh" }}
           />
         </div>
       ) : (
