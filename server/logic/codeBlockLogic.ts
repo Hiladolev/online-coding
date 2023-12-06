@@ -6,7 +6,7 @@ const createCodeBlocksTable = () => {
       id INT NOT NULL AUTO_INCREMENT,
       title VARCHAR(45) NOT NULL,
       code VARCHAR(256) NOT NULL,
-      entrances INT NULL,
+      entrances VARCHAR(256) NULL,
       PRIMARY KEY (id));`;
   const response = dal_mysql.execute(SQLcommand);
 };
@@ -24,26 +24,17 @@ const getEntrancesById = async (id: number) => {
   );
 };
 
-const addStudentEntranceByCodeBlockId = async (id: number) => {
+const addEntranceByCodeBlockId = async (id: number, timestamp: string) => {
   return await dal_mysql.execute(
     `UPDATE
     online_coding.code_blocks 
    SET
-    entrances = entrances + 1 
+    entrances = '${timestamp}'
    WHERE
     id=${id}`
   );
 };
-const setMentorEntranceByCodeBlockId = async (id: number) => {
-  return await dal_mysql.execute(
-    `UPDATE
-    online_coding.code_blocks 
-   SET
-    entrances = 1 
-   WHERE
-    id=${id}`
-  );
-};
+
 const getCodeBlockById = async (id: number) => {
   return await dal_mysql.execute(
     `SELECT * FROM online_coding.code_blocks where id=${id}`
@@ -54,7 +45,6 @@ export default {
   createCodeBlocksTable,
   getAllCodeBlocks,
   getEntrancesById,
-  addStudentEntranceByCodeBlockId,
-  setMentorEntranceByCodeBlockId,
   getCodeBlockById,
+  addEntranceByCodeBlockId,
 };

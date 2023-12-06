@@ -21,6 +21,11 @@ const io = new Server(server, {
 });
 //New connection - receiving event from the client-side
 io.on("connection", (socket) => {
+  socket.on("user_entrance", (id) => {
+    const timestamp = new Date().toISOString();
+    logic.addEntranceByCodeBlockId(id, timestamp);
+    socket.emit("updated_entrance", id);
+  });
   socket.on("code change", (data, id) => {
     socket.broadcast.emit("received code change", data, id);
     socket.emit("received code change", data, id);

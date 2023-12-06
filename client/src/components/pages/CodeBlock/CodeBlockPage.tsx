@@ -24,13 +24,7 @@ function CodeBlockPage(): JSX.Element {
         setCodeBlockObj(result);
         //Updating entrances by codeBlockId
         if (!result.entrances) {
-          axios.put(
-            `http://localhost:8080/api/v1/codeBlocks/setMentorEntrance/${id}`
-          );
-        } else {
-          axios.put(
-            `http://localhost:8080/api/v1/codeBlocks/addStudentEntrance/${id}`
-          );
+          socket.emit("user_entrance", id);
         }
       })
       .catch((error) => {
@@ -84,13 +78,9 @@ function CodeBlockPage(): JSX.Element {
             label={"code"}
             value={codeBlockObj.code}
             onChange={codeChange}
-            // InputLabelProps={{
-            //   shrink: true,
-            // }}
             InputProps={{
               readOnly: codeBlockObj.entrances === null,
             }}
-            // sx={{ pt: 1, width: "100vh" }}
           />
         </div>
       ) : (
