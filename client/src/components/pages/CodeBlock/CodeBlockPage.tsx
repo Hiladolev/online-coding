@@ -24,13 +24,7 @@ function CodeBlockPage(): JSX.Element {
         setCodeBlockObj(result);
         //Updating entrances by codeBlockId
         if (!result.entrances) {
-          axios.put(
-            `http://localhost:8080/api/v1/codeBlocks/setMentorEntrance/${id}`
-          );
-        } else {
-          axios.put(
-            `http://localhost:8080/api/v1/codeBlocks/addStudentEntrance/${id}`
-          );
+          socket.emit("user_entrance", id);
         }
       })
       .catch((error) => {
