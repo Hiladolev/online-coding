@@ -7,6 +7,7 @@ import { socket } from "../../layout/Main";
 import Editor from "react-simple-code-editor";
 import { highlight, languages } from "prismjs";
 import "prismjs/themes/prism.css";
+import "./CodeBlock.css";
 
 function CodeBlockPage(): JSX.Element {
   const params = useParams();
@@ -33,8 +34,8 @@ function CodeBlockPage(): JSX.Element {
   };
 
   useEffect(() => {
-    if (!codeBlockObj) getCodeBlock(codeBlockId);
-  }, [codeBlockId, codeBlockObj]);
+    getCodeBlock(codeBlockId);
+  }, [codeBlockId]);
 
   //Sending codeChange event to the server
   const codeChange = (val: string) => {
@@ -82,6 +83,7 @@ function CodeBlockPage(): JSX.Element {
               fontSize: 20,
               marginBlockStart: 50,
             }}
+            textareaClassName="textAreaStyles"
             readOnly={codeBlockObj.entrances === null}
           />
         </div>
