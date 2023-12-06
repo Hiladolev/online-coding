@@ -6,7 +6,7 @@ const createCodeBlocksTable = () => {
       id INT NOT NULL AUTO_INCREMENT,
       title VARCHAR(45) NOT NULL,
       code VARCHAR(256) NOT NULL,
-      entrances INT NULL,
+      entrances VARCHAR(256) NULL,
       PRIMARY KEY (id));`;
   const response = dal_mysql.execute(SQLcommand);
 };
