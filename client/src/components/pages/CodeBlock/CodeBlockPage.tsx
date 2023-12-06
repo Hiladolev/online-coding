@@ -6,8 +6,6 @@ import Typography from "@mui/material/Typography";
 import { socket } from "../../layout/Main";
 import Editor from "react-simple-code-editor";
 import { highlight, languages } from "prismjs";
-import "prismjs/components/prism-clike";
-import "prismjs/components/prism-javascript";
 import "prismjs/themes/prism.css";
 
 function CodeBlockPage(): JSX.Element {
