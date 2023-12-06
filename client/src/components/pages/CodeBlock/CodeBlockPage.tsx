@@ -1,12 +1,13 @@
 import { useParams } from "react-router";
 import axios from "axios";
-import { ChangeEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import CodeBlockModel from "../../models/CodeBlock";
-import { TextField } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { socket } from "../../layout/Main";
-import "highlight.js/styles/github.css";
-import Highlight from "react-highlight.js";
+import Editor from "react-simple-code-editor";
+import { highlight, languages } from "prismjs";
+import "prismjs/themes/prism.css";
+import "./CodeBlock.css";
 
 function CodeBlockPage(): JSX.Element {
   const params = useParams();
@@ -33,12 +34,12 @@ function CodeBlockPage(): JSX.Element {
   };
 
   useEffect(() => {
-    if (!codeBlockObj) getCodeBlock(codeBlockId);
-  }, [codeBlockId, codeBlockObj]);
+    getCodeBlock(codeBlockId);
+  }, [codeBlockId]);
 
   //Sending codeChange event to the server
-  const codeChange = (e: ChangeEvent<HTMLInputElement>) => {
-    socket.emit("code change", e.target.value, codeBlockId);
+  const codeChange = (val: string) => {
+    socket.emit("code change", val, codeBlockId);
   };
 
   //Receiving code changes back from the server : data + id (eventName, listener)
@@ -70,17 +71,20 @@ function CodeBlockPage(): JSX.Element {
           >
             {codeBlockObj.title}
           </Typography>
-          <Highlight language="javascript">{codeBlockObj.code}</Highlight>
-          <TextField
-            fullWidth
-            id="outlined-multiline-static"
-            multiline
-            label={"code"}
+          <Editor
             value={codeBlockObj.code}
-            onChange={codeChange}
-            InputProps={{
-              readOnly: codeBlockObj.entrances === null,
+            onValueChange={(value) => codeChange(value)}
+            highlight={(code) =>
+              highlight(code, languages.javascript, "javascript")
+            }
+            padding={10}
+            style={{
+              fontFamily: '"Fira code", "Fira Mono", monospace',
+              fontSize: 20,
+              marginBlockStart: 50,
             }}
+            textareaClassName="textAreaStyles"
+            readOnly={codeBlockObj.entrances === null}
           />
         </div>
       ) : (
